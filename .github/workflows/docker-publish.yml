@@ -34,6 +34,3 @@ jobs:
          
         run: |
           dotnet publish  --os linux --arch x64 -c Release /p:PublishProfile=github  /p:ContainerImageTag=1.0.0
-          
- 
-        
