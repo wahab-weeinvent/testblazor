@@ -1,0 +1,39 @@
+name: Docker Publish
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME_WEB: ${{ github.actor }}/testblazor:1.0.0 
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .Net Core
+        uses: actions/setup-dotnet@v4.2.0
+        with:
+          dotnet-version: '8.x'
+      
+
+      - name: Login to GitHub Container Registry
+        run: |
+          echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Publish and push the container image for testblazor
+         
+        run: |
+          dotnet publish  --os linux --arch x64 -c Release /p:PublishProfile=github  /p:ContainerImageTag=1.0.0
+          
+ 
+        
