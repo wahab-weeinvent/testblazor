@@ -5,8 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
-    <ContainerImageTag>1.0.0</ContainerImageTag> 
-    <PublishProfile>github</PublishProfile>
+    <ContainerImageTag>1.0.0</ContainerImageTag>  
   </PropertyGroup>
 
 </Project>
