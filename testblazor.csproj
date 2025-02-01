@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
     <ContainerImageTag>1.0.0</ContainerImageTag> 
+    <PublishProfile>github</PublishProfile>
   </PropertyGroup>
 
 </Project>
