@@ -37,4 +37,6 @@ jobs:
         run: |
           echo "Image pushed to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}"
           docker images | grep testblazor
-        
+      - name: Verify image push
+        run: |
+          docker pull ghcr.io/wahab-weeinvent/testblazor:1.0.0
