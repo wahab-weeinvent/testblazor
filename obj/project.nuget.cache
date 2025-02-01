@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9Nf1BP0Ex98=",
+  "dgSpecHash": "HEW48+G7Epo=",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\testblazor\\testblazor.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\8.0.12\\microsoft.netcore.app.host.linux-x64.8.0.12.nupkg.sha512"
+  ],
   "logs": []
 }
