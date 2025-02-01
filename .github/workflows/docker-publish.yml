@@ -33,11 +33,8 @@ jobs:
       - name: Publish and push the container image for testblazor
         run: |
           dotnet publish  --os linux --arch x64 -c Release  /p:PublishProfile=DefaultContainer /p:ContainerImageTag=1.0.0
-          docker images
-      - name: Build Docker Image
+      - name: Verify Image in GHCR
         run: |
-          docker build -t $IMAGE_NAME_WEB .
-
-      - name: Push Docker Image to GHCR
-        run: |
-          docker push $IMAGE_NAME_WEB
+          echo "Image pushed to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}"
+          docker images | grep testblazor
+        
