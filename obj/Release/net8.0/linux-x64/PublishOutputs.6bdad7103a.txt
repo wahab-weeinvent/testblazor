@@ -1,0 +1,7 @@
+C:\Users\USER\testblazor\bin\Release\net8.0\linux-x64\publish\testblazor
+C:\Users\USER\testblazor\bin\Release\net8.0\linux-x64\publish\appsettings.Development.json
+C:\Users\USER\testblazor\bin\Release\net8.0\linux-x64\publish\appsettings.json
+C:\Users\USER\testblazor\bin\Release\net8.0\linux-x64\publish\testblazor.dll
+C:\Users\USER\testblazor\bin\Release\net8.0\linux-x64\publish\testblazor.deps.json
+C:\Users\USER\testblazor\bin\Release\net8.0\linux-x64\publish\testblazor.runtimeconfig.json
+C:\Users\USER\testblazor\bin\Release\net8.0\linux-x64\publish\testblazor.pdb
