@@ -34,3 +34,5 @@ jobs:
         run: |
           dotnet publish  --os linux --arch x64 -c Release  /p:PublishProfile=DefaultContainer /p:ContainerImageTag=1.0.0
           docker images
+          docker scout quickview  testblazor:1.0.0
+          docker scout quickview ghcr.io/wahab-weeinvent/testblazor:1.0.0
