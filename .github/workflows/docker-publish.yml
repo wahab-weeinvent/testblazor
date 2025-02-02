@@ -27,7 +27,7 @@ jobs:
       - name: Set environment variables
         id: set-variables
         run: |
-          VERSION=$(grep -oP '<ContainerImageTag>\K[^<]+' testblazor/testblazor.csproj || echo "1.0.0")
+          VERSION=$(grep -oP '<ContainerImageTag>\K[^<]+'  testblazor.csproj || echo "1.0.0")
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
       - name: Publish testblazor
