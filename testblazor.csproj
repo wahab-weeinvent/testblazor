@@ -5,7 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
-    <ContainerImageTag>1.0.0</ContainerImageTag>  
+     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerRepository>testblazor</ContainerRepository>
+    <ContainerImageTags>v1.0.0;latest</ContainerImageTags>
   </PropertyGroup>
 
 </Project>
