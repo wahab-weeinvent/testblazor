@@ -1,45 +1,54 @@
-name: Docker Publish
+name: Build and Publish testblazor Image
 
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME_WEB: ${{ github.actor }}/testblazor:1.0.0 
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     permissions:
       packages: write
       contents: read
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up .Net Core
-        uses: actions/setup-dotnet@v3
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
-      
+          dotnet-version: 8.x
 
-      - name: Login to GitHub Container Registry
+      - name: Set environment variables
+        id: set-variables
         run: |
-          echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          VERSION=$(grep -oP '<ContainerImageTag>\K[^<]+' testblazor/testblazor.csproj || echo "1.0.0")
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
-      - name: Publish and push the container image for testblazor
+      - name: Publish testblazor
+        run: dotnet publish testblazor --os linux --arch x64 -c Release /p:PublishProfile=DefaultContainer /p:ContainerImageTag=${{ env.VERSION }}
+
+      - name: Tag Docker Image
         run: |
-          dotnet publish  --os linux --arch x64 -c Release  /p:PublishProfile=DefaultContainer /p:ContainerImageTag=1.0.0
+          docker tag testblazor:${{ env.VERSION }} ${{ env.REGISTRY }}/${{ github.actor }}/testblazor:${{ env.VERSION }}
+          docker tag testblazor:latest ${{ env.REGISTRY }}/${{ github.actor }}/testblazor:latest
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
+
+      - name: Push Docker Image to GHCR
+        run: docker push -a ${{ env.REGISTRY }}/${{ github.actor }}/testblazor
+
       - name: Verify Image in GHCR
         run: |
-          echo "Image pushed to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}"
+          echo "Image pushed to: ${{ env.REGISTRY }}/${{ github.actor }}/testblazor:${{ env.VERSION }}"
           docker images | grep testblazor
-      - name: Verify image push
-        run: |
-           docker --version
-           docker build . -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}temp --no-cache
-           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}temp ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}
-           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}
