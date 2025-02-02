@@ -35,6 +35,7 @@ jobs:
 
       - name: Tag Docker Image
         run: |
+          docker images
           docker tag testblazor:${{ env.VERSION }} ${{ env.REGISTRY }}/${{ github.actor }}/testblazor:${{ env.VERSION }}
           docker tag testblazor:latest ${{ env.REGISTRY }}/${{ github.actor }}/testblazor:latest
 
