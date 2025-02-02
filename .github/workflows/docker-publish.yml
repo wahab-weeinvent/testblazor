@@ -31,7 +31,7 @@ jobs:
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
       - name: Publish testblazor
-        run: dotnet publish --os linux --arch x64 -c Release /p:PublishProfile=DefaultContainer /p:ContainerImageTag=${{ env.VERSION }}
+        run: dotnet publish --os linux --arch x64 -c Release /t:PublishContainer
 
       - name: Tag Docker Image
         run: |
