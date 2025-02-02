@@ -39,4 +39,7 @@ jobs:
           docker images | grep testblazor
       - name: Verify image push
         run: |
-          docker pull ghcr.io/wahab-weeinvent/testblazor:1.0.0
+           docker --version
+           docker build . -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}temp --no-cache
+           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}temp ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}
+           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_WEB }}
